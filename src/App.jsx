@@ -19,14 +19,7 @@ const App = () => {
 
     try {
       const res = await fetch(
-        `https://weatherapi-com.p.rapidapi.com/current.json?q=${city}`,
-        {
-          method: "GET",
-          headers: {
-            "X-RapidAPI-Key": "88bae5927a86d21f6fb06ccab7c9beed",
-            "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
-          },
-        }
+        `https://api.weatherstack.com/current?access_key=88bae5927a86d21f6fb06ccab7c9beed&query=${city}`
       );
 
       if (!res.ok) {
@@ -35,15 +28,19 @@ const App = () => {
 
       const data = await res.json();
 
+      if (data.success === false) {
+        throw new Error(data.error.info || "City not found ❌");
+      }
+
       setWeather({
         cityName: data.location.name,
         country: data.location.country,
-        temp: data.current.temp_c,
-        tempF: data.current.temp_f,
-        condition: data.current.condition.text,
+        tempC: data.current.temperature,
+        tempF: Math.round((data.current.temperature * 9) / 5 + 32),
+        condition: data.current.weather_descriptions[0] || "N/A",
         humidity: data.current.humidity,
-        wind: data.current.wind_kph,
-        icon: data.current.condition.icon,
+        wind: data.current.wind_speed,
+        icon: data.current.weather_icons?.[0] || "",
       });
     } catch (err) {
       setError(err.message || "Failed to fetch weather 😢");
@@ -55,11 +52,13 @@ const App = () => {
   return (
     <div className="bg-dark text-light min-vh-100 d-flex flex-column align-items-center justify-content-start py-5">
       <h1 className="fw-bold mb-4 text-info">🌤 Weather App</h1>
+
       <div className="mb-3">
         <button onClick={toggleUnit} className="btn btn-secondary">
           Show in °{unit === "C" ? "F" : "C"}
         </button>
       </div>
+
       <SearchBar onSearch={getWeather} />
       {loading && <Loader />}
       {error && <div className="alert alert-danger mt-3 w-50 text-center">{error}</div>}
