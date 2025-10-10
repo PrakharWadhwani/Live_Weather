@@ -1,0 +1,46 @@
+.weather-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 15px;
+  overflow: hidden;
+  width: 350px;
+  max-width: 90%;
+  margin: auto;
+}
+
+/* Hover effect */
+.weather-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Weather backgrounds */
+.sunny-bg {
+  background: linear-gradient(135deg, #fceabb, #f8b500);
+  color: #333;
+}
+
+.cloudy-bg {
+  background: linear-gradient(135deg, #d7dae0, #a0a5b0);
+  color: #fff;
+}
+
+.rainy-bg {
+  background: linear-gradient(135deg, #74b9ff, #0984e3);
+  color: #fff;
+}
+
+.snow-bg {
+  background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+  color: #333;
+}
+
+.default-bg {
+  background: linear-gradient(135deg, #81ecec, #6c5ce7);
+  color: #fff;
+}
+
+/* Weather icon */
+.weather-icon {
+  width: 80px;
+  height: 80px;
+}
