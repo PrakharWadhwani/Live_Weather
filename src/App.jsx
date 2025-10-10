@@ -23,7 +23,7 @@ const App = () => {
         {
           method: "GET",
           headers: {
-            "X-RapidAPI-Key": "YOUR_RAPIDAPI_KEY",
+            "X-RapidAPI-Key": "88bae5927a86d21f6fb06ccab7c9beed",
             "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
           },
         }
