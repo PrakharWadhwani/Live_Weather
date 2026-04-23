@@ -19,7 +19,7 @@ const App = () => {
 
     try {
       const res = await fetch(
-        `https://api.weatherstack.com/current?access_key=88bae5927a86d21f6fb06ccab7c9beed&query=${city}`
+        
       );
 
       if (!res.ok) {
